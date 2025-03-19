@@ -68,10 +68,27 @@ public:
 		Current->Next = NewNode;
 	}
 
-	void PrintList()
+	void DeleteNode(int Value)
 	{
-		for (Node *cur = Head; cur; cur = cur->Next)
-			cout << cur->data << "\t";
-		cout << endl;
-	}
-};
+		Node *Current = Head, *Prev = Head;
+
+		if (Head == NULL)
+		{
+			cout << "The List Is Empty." << endl;
+			return;
+		}
+
+		if (Current->Data == Value)
+		{
+			Head = Head->Next;
+			delete Current;
+			return;
+		}
+
+		void PrintList()
+		{
+			for (Node *cur = Head; cur; cur = cur->Next)
+				cout << cur->data << "\t";
+			cout << endl;
+		}
+	};

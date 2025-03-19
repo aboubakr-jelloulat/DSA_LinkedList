@@ -8,6 +8,8 @@ int main(void)
 	list.InsertAtBeginning(2);
 	list.InsertAtBeginning(1);
 
+	list.DeleteNode(3);
+
 	list.PrintList();
 	
 	
