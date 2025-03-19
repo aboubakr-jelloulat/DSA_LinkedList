@@ -78,17 +78,67 @@ public:
 			return;
 		}
 
-		if (Current->Data == Value)
+		if (Current->data == Value)
 		{
 			Head = Head->Next;
 			delete Current;
 			return;
 		}
 
-		void PrintList()
+		while (Current != NULL && Current->data != Value)
 		{
-			for (Node *cur = Head; cur; cur = cur->Next)
-				cout << cur->data << "\t";
-			cout << endl;
+			Prev = Current;
+			Current = Current->Next;
 		}
-	};
+
+		// Unlink the node from the list
+		Prev->Next = Current->Next;
+
+		// Delete the node from the memory
+		delete Current;
+	}
+
+	void DeleteFirstNode()
+	{
+		if (Head == NULL)
+			return;
+
+		Node *FirstNode = Head;
+
+		Head = Head->Next;
+		if (Head != NULL)
+			Head->Prev = NULL;
+
+		delete FirstNode;
+	}
+
+	void DeleteLastNode()
+	{
+		if (Head == NULL)
+			return;
+
+		Node *Current = Head, *Prev = Head;
+
+		if (Current->Next == NULL)
+		{
+			Head = NULL;
+			delete Current;
+			return;
+		}
+
+		while (Current->Next != NULL)
+		{
+			Prev = Current;
+			Current = Current->Next;
+		}
+		Prev->Next = NULL;
+		delete Current;
+	}
+
+	void PrintList()
+	{
+		for (Node *cur = Head; cur; cur = cur->Next)
+			cout << cur->data << "\t";
+		cout << endl;
+	}
+};
