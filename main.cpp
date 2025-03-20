@@ -16,18 +16,10 @@ int main()
 
     MydblLinkedList.PrintList();
 
-    cout << "\nNumber of items in the linked list : " << MydblLinkedList.Size();
-
-    MydblLinkedList.Clear();
+	MydblLinkedList.Reverse();
 
     MydblLinkedList.PrintList();
 
-    if (MydblLinkedList.IsEmpty())
-        cout << "true";
-    else
-        cout << "no";
-
-    cout << MydblLinkedList.Size();
-
+    
 }
 // g++ -std=c++11

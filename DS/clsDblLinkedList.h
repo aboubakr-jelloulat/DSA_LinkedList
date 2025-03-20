@@ -6,7 +6,7 @@ template <class T>
 class clsDblLinkedList
 {
 
-protected :
+protected:
 	int _Size = 0;
 
 public:
@@ -220,6 +220,48 @@ public:
 		while (_Size)
 			DeleteFirstNode();
 	}
+
+	void Reverse()
+	{
+		Node *current = head;
+		Node *temp = nullptr;
+		
+		while (current)
+		{
+			temp = current->prev;
+			current->prev = current->next;
+			current->next = temp;
+			current = current->prev;
+		}
+		if (temp)
+		{
+			head = temp->prev;
+		}
+	}
+
+	/*
+		void Reverse()
+	{
+		if (!head || !head->next)
+			return ;
+
+		Node *prev = nullptr;
+		Node *current = head;
+		while (current)
+		{
+			Node *next = current->next;
+			current->next = prev;
+			prev = current;
+			current = next;	
+		}
+
+		head = prev;
+	}
+
+	*/
+
+
+
 
 
 };
