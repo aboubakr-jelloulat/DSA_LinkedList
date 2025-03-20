@@ -5,140 +5,221 @@ using namespace std;
 template <class T>
 class clsDblLinkedList
 {
-private:
-	struct Node
-	{
-		T data;
-		Node *Next;
-		Node *Prev;
-	};
 
-	Node *Head = nullptr;
-
-	Node *_AddNewNode(T data)
-	{
-		Node *newNode = new Node;
-		newNode->data = data;
-		newNode->Next = nullptr;
-		newNode->Prev = nullptr;
-		return newNode;
-	}
+protected :
+	int _Size = 0;
 
 public:
-	void InsertAtBeginning(T Value)
+	class Node
 	{
-		Node *NewNode = _AddNewNode(Value);
-		NewNode->Prev = nullptr;
-		NewNode->Next = Head;
 
-		if (Head != nullptr)
-			Head->Prev = NewNode;
+	public:
+		T value;
+		Node *next;
+		Node *prev;
+	};
 
-		Head = NewNode;
+	Node *head = NULL;
+
+	void InsertAtBeginning(T value)
+	{
+
+		Node *newNode = new Node();
+		newNode->value = value;
+		newNode->next = head;
+		newNode->prev = NULL;
+
+		if (head != NULL)
+		{
+			head->prev = newNode;
+		}
+		head = newNode;
+		_Size++;
 	}
 
-	Node *Find(int Value)
-	{
-		while (Head != NULL)
-		{
-			if (Head->data == Value)
-				return Head;
+	void PrintList()
 
-			Head = Head->Next;
+	{
+		Node *Current = head;
+
+		while (Current != NULL)
+		{
+			cout << Current->value << " ";
+			Current = Current->next;
 		}
+		cout << "\n";
+	}
+
+	Node *Find(T Value)
+	{
+		Node *Current = head;
+		while (Current != NULL)
+		{
+
+			if (Current->value == Value)
+				return Current;
+
+			Current = Current->next;
+		}
+
 		return NULL;
 	}
 
-	void InsertAfter(Node *Current, int Value)
+	void InsertAfter(Node *current, T value)
 	{
-		if (Current == NULL)
+
+		/*  1 - Create a new node with the desired value.
+			 2-Set the next pointer of the new node to the next node of the current node.
+			 3-Set the previous pointer of the new node to the current node.
+			 4-Set the next pointer of the current node to the new node.
+			 5-Set the previous pointer of the next node to the new node(if it exists).
+		*/
+
+		Node *newNode = new Node();
+		newNode->value = value;
+		newNode->next = current->next;
+		newNode->prev = current;
+
+		if (current->next != NULL)
 		{
-			cout << "The List Is Empty" << endl;
-			return;
+			current->next->prev = newNode;
 		}
-
-		Node *NewNode = _AddNewNode(Value);
-
-		NewNode->Prev = Current;
-		NewNode->Next = Current->Next;
-
-		if (Current->Next != NULL)
-			Current->Next->Prev = NewNode;
-
-		Current->Next = NewNode;
+		current->next = newNode;
+		_Size++;
 	}
 
-	void DeleteNode(int Value)
+	void InsertAtEnd(T value)
 	{
-		Node *Current = Head, *Prev = Head;
 
-		if (Head == NULL)
+		/*
+			1-Create a new node with the desired value.
+			2-Traverse the list to find the last node.
+			3-Set the next pointer of the last node to the new node.
+			4-Set the previous pointer of the new node to the last node.
+		*/
+
+		Node *newNode = new Node();
+		newNode->value = value;
+		newNode->next = NULL;
+		if (head == NULL)
 		{
-			cout << "The List Is Empty." << endl;
+			newNode->prev = NULL;
+			head = newNode;
+		}
+		else
+		{
+			Node *current = head;
+			while (current->next != NULL)
+			{
+				current = current->next;
+			}
+			current->next = newNode;
+			newNode->prev = current;
+		}
+		_Size++;
+	}
+
+	void DeleteNode(Node *&NodeToDelete)
+	{
+
+		/*
+			1-Set the next pointer of the previous node to the next pointer of the current node.
+			2-Set the previous pointer of the next node to the previous pointer of the current node.
+			3-Delete the current node.
+		*/
+		if (head == NULL || NodeToDelete == NULL)
+		{
 			return;
 		}
-
-		if (Current->data == Value)
+		if (head == NodeToDelete)
 		{
-			Head = Head->Next;
-			delete Current;
-			return;
+			head = NodeToDelete->next;
 		}
-
-		while (Current != NULL && Current->data != Value)
+		if (NodeToDelete->next != NULL)
 		{
-			Prev = Current;
-			Current = Current->Next;
+			NodeToDelete->next->prev = NodeToDelete->prev;
 		}
-
-		// Unlink the node from the list
-		Prev->Next = Current->Next;
-
-		// Delete the node from the memory
-		delete Current;
+		if (NodeToDelete->prev != NULL)
+		{
+			NodeToDelete->prev->next = NodeToDelete->next;
+		}
+		delete NodeToDelete;
+		_Size--;
 	}
 
 	void DeleteFirstNode()
 	{
-		if (Head == NULL)
+
+		/*
+			1-Store a reference to the head node in a temporary variable.
+			2-Update the head pointer to point to the next node in the list.
+			3-Set the previous pointer of the new head to NULL.
+			4-Delete the temporary reference to the old head node.
+		*/
+
+		if (head == NULL)
+		{
 			return;
-
-		Node *FirstNode = Head;
-
-		Head = Head->Next;
-		if (Head != NULL)
-			Head->Prev = NULL;
-
-		delete FirstNode;
+		}
+		Node *temp = head;
+		head = head->next;
+		if (head != NULL)
+		{
+			head->prev = NULL;
+		}
+		delete temp;
+		_Size--;
 	}
 
 	void DeleteLastNode()
 	{
-		if (Head == NULL)
-			return;
 
-		Node *Current = Head, *Prev = Head;
+		/*
+			1-Traverse the list to find the last node.
+			2-Set the next pointer of the second-to-last node to NULL.
+			3-Delete the last node.
+		*/
 
-		if (Current->Next == NULL)
+		if (head == NULL)
 		{
-			Head = NULL;
-			delete Current;
 			return;
 		}
 
-		while (Current->Next != NULL)
+		if (head->next == NULL)
 		{
-			Prev = Current;
-			Current = Current->Next;
+			delete head;
+			head = NULL;
+			return;
 		}
-		Prev->Next = NULL;
-		delete Current;
+
+		Node *current = head;
+		// we need to find the node before last node.
+		while (current->next->next != NULL)
+		{
+			current = current->next;
+		}
+
+		Node *temp = current->next;
+		current->next = NULL;
+		delete temp;
+		_Size--;
 	}
 
-	void PrintList()
+	int Size()
 	{
-		for (Node *cur = Head; cur; cur = cur->Next)
-			cout << cur->data << "\t";
-		cout << endl;
+		return _Size;
 	}
+
+	bool IsEmpty()
+	{
+		return (_Size == 0 ? true : false);
+	}
+
+	void Clear()
+	{
+		while (_Size)
+			DeleteFirstNode();
+	}
+
+
 };

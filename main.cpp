@@ -1,16 +1,33 @@
 #include "DS/clsDblLinkedList.h"
 
-int main(void)
+using namespace std;
+
+
+int main()
 {
-	clsDblLinkedList<int> list;
 
-	list.InsertAtBeginning(3);
-	list.InsertAtBeginning(2);
-	list.InsertAtBeginning(1);
+    clsDblLinkedList <int> MydblLinkedList;
 
-	list.DeleteLastNode();
+    MydblLinkedList.InsertAtBeginning(5);
+    MydblLinkedList.InsertAtBeginning(4);
+    MydblLinkedList.InsertAtBeginning(3);
+    MydblLinkedList.InsertAtBeginning(2);
+    MydblLinkedList.InsertAtBeginning(1);
 
-	list.PrintList();
-	
-	
+    MydblLinkedList.PrintList();
+
+    cout << "\nNumber of items in the linked list : " << MydblLinkedList.Size();
+
+    MydblLinkedList.Clear();
+
+    MydblLinkedList.PrintList();
+
+    if (MydblLinkedList.IsEmpty())
+        cout << "true";
+    else
+        cout << "no";
+
+    cout << MydblLinkedList.Size();
+
 }
+// g++ -std=c++11
