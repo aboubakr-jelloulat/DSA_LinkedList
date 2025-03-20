@@ -16,11 +16,10 @@ int main()
 
     MydblLinkedList.PrintList();
 
-	clsDblLinkedList <int> ::Node *N;
+	MydblLinkedList.UpdateItem(2, 1337);
 
 
-
-	cout << "\nItem(2) Value is: " << MydblLinkedList.GetItem(2);
+	MydblLinkedList.PrintList();
 
     
 }
