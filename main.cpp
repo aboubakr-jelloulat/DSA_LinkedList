@@ -10,15 +10,17 @@ int main()
 
     MydblLinkedList.InsertAtBeginning(5);
     MydblLinkedList.InsertAtBeginning(4);
-    MydblLinkedList.InsertAtBeginning(3);
+    MydblLinkedList.InsertAtBeginning(42);
     MydblLinkedList.InsertAtBeginning(2);
     MydblLinkedList.InsertAtBeginning(1);
 
     MydblLinkedList.PrintList();
 
-	MydblLinkedList.Reverse();
+	clsDblLinkedList <int> ::Node *N;
 
-    MydblLinkedList.PrintList();
+	N = MydblLinkedList.GetNode(2);
+
+	cout << "\nNode value : " << N->value << endl;
 
     
 }

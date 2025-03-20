@@ -261,7 +261,17 @@ public:
 	*/
 
 
-
+	Node *GetNode(int index)
+	{
+		if (index > _Size - 1 || index < 0)
+			return nullptr;
+		int i = 0;
+		for (Node *cur = head; cur; cur = cur->next, i++)
+		{
+			if (i == index)
+				return cur;
+		}
+	}
 
 
 };
