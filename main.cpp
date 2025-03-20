@@ -10,13 +10,13 @@ int main()
 
     MydblLinkedList.InsertAtBeginning(5);
     MydblLinkedList.InsertAtBeginning(4);
-    MydblLinkedList.InsertAtBeginning(42);
+    MydblLinkedList.InsertAtBeginning(3);
     MydblLinkedList.InsertAtBeginning(2);
     MydblLinkedList.InsertAtBeginning(1);
 
     MydblLinkedList.PrintList();
 
-	MydblLinkedList.UpdateItem(2, 1337);
+	MydblLinkedList.InsertAfter(0, 42);
 
 
 	MydblLinkedList.PrintList();

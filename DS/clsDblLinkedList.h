@@ -295,5 +295,17 @@ public:
 			return false;
 	}
 
+	bool InsertAfter(int Index, T Value)
+	{
+		Node *ItemNode = GetNode(Index);
+		if (ItemNode)
+		{
+			InsertAfter(ItemNode, Value);
+			return true;
+		}
+		return false;
+	}
+
+
 
 };
