@@ -18,9 +18,9 @@ int main()
 
 	clsDblLinkedList <int> ::Node *N;
 
-	N = MydblLinkedList.GetNode(2);
 
-	cout << "\nNode value : " << N->value << endl;
+
+	cout << "\nItem(2) Value is: " << MydblLinkedList.GetItem(2);
 
     
 }

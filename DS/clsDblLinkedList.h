@@ -225,7 +225,7 @@ public:
 	{
 		Node *current = head;
 		Node *temp = nullptr;
-		
+
 		while (current)
 		{
 			temp = current->prev;
@@ -252,14 +252,13 @@ public:
 			Node *next = current->next;
 			current->next = prev;
 			prev = current;
-			current = next;	
+			current = next;
 		}
 
 		head = prev;
 	}
 
 	*/
-
 
 	Node *GetNode(int index)
 	{
@@ -273,5 +272,13 @@ public:
 		}
 	}
 
+	T	GetItem(int index)
+	{
+		Node *ItemNode = GetNode(index);
 
+		if (!ItemNode)
+			return T(); // Return a default-constructed value of type T
+		else
+			return ItemNode->value;
+	}
 };
