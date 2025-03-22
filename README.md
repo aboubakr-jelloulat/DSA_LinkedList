@@ -20,7 +20,8 @@ Welcome to the **Doubly Linked List** repository! This project is a custom-built
 1. Clone the repository:
    ```sh
    git clone https://github.com/aboubakr-jelloulat/DSA_project1.git
-   cd DSA_project1
+   cd DSA_LinkedList
+
    ```
 2. Include the header file in your project:
    ```cpp
