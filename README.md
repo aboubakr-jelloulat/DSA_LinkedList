@@ -19,7 +19,7 @@ Welcome to the **Doubly Linked List** repository! This project is a custom-built
 ### 🔧 Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/aboubakr-jelloulat/DSA_project1.git
+   git clone https://github.com/aboubakr-jelloulat/DSA_LinkedList.git
    cd DSA_LinkedList
 
    ```
